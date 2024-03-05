@@ -1,0 +1,50 @@
+/* 
+ * Copyright 2024-2025 ISC Konstanz
+ * 
+ * This file is part of OpenESG.
+ * For more information visit https://github.com/isc-konstanz/OpenESG
+ * 
+ * OpenESG is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * OpenESG is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with OpenESG.  If not, see <http://www.gnu.org/licenses/>.
+ */
+project.ext {
+    projectKey = 'openmuc-lib-parser-esg'
+    projectName = 'ESG-Parser'
+    projectFullName = 'OpenMUC Library - Easy Smart Grid Parser Service'
+    projectDescription = 'Easy Smart Grid parser library for the OpenMUC framework.'
+}
+
+dependencies {
+    implementation fileTree(dir: rootDir.getPath() + '/libs/org.openmuc.framework', include: ['*.jar'])
+
+    implementation group: 'org.osgi', name: 'osgi.core', version: '8.0.0'
+    implementation group: 'org.osgi', name: 'org.osgi.service.component.annotations', version: '1.4.0'
+    implementation group: 'org.apache.felix', name: 'org.apache.felix.scr', version: '2.1.30'
+
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+}
+
+jar {
+    bnd('Bundle-Name':        projectFullName,
+        'Bundle-Description': projectDescription,
+        'Export-Package':     'org.openmuc.framework.lib.parser.esg.*')
+}
+
+eclipse {
+    project {
+        name = archivesBaseName
+    }
+}
